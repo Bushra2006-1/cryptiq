@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CRYPTIQ — Trust Every File. Verify Every Origin.</title>
+<meta name="description" content="CRYPTIQ proves the origin of digital content at creation with SHA-256 fingerprints and TEE-secured certificates." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="grid-floor"></div>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 32 32" width="28" height="28">
+          <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <polygon points="16,9 22,12.5 22,19.5 16,23 10,19.5 10,12.5" fill="currentColor" opacity="0.85"/>
+        </svg>
+      </span>
+      <span class="logo-text">CRYPTIQ</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#why-it-matters">Why It Matters</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#demo">Live Demo</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#demo" class="btn btn-ghost" data-mode="stamp">Stamp It</a>
+      <a href="#demo" class="btn btn-primary" data-mode="verify">Verify It</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top" class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-content reveal">
+    <div class="tee-badge">
+      <span class="pulse-dot"></span>
+      TEE-SECURED ORIGIN INFRASTRUCTURE
+    </div>
+    <h1 class="hero-title">
+      Trust Every File.<br />
+      <span class="gradient-text">Verify Every Origin.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Every piece of content receives a cryptographic birth certificate secured
+      by a Trusted Execution Environment — proving who made it, when, and how.
+    </p>
+    <div class="hero-actions">
+      <a href="#demo" class="btn btn-primary btn-lg" data-mode="stamp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z" stroke="currentColor" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        STAMP IT
+      </a>
+      <a href="#demo" class="btn btn-outline btn-lg" data-mode="verify">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        VERIFY IT
+      </a>
+    </div>
+
+    <div class="hero-visual">
+      <div class="enclave-stage">
+        <div class="enclave-file" id="enclaveFile">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M15 2v5h5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div class="enclave-ring r1"></div>
+        <div class="enclave-ring r2"></div>
+        <div class="enclave-ring r3"></div>
+        <div class="enclave-core">
+          <span class="enclave-core-label">TEE</span>
+        </div>
+        <div class="hash-stream" id="hashStream"></div>
+        <div class="enclave-cert" id="enclaveCert">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l8 4v6c0 5.5-3.8 8.7-8 10-4.2-1.3-8-4.5-8-10V6l8-4z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 12l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="enclave-caption" id="enclaveCaption">Hashing file with SHA-256…</div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span></span>
+  </div>
+</header>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="section">
+  <div class="section-head reveal">
+    <span class="section-tag">PROCESS</span>
+    <h2>How It Works</h2>
+    <p>Four cryptographic steps stand between any file and an unforgeable proof of origin.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal">
+      <div class="step-number">01</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Upload File</h3>
+      <p>Drop in any image, video, or document. CRYPTIQ never alters the original bytes.</p>
+    </div>
+    <div class="step-connector reveal"></div>
+    <div class="step-card reveal">
+      <div class="step-number">02</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26"><rect x="3" y="9" width="18" height="9" rx="1.5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M7 9V6a5 5 0 0110 0v3" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
+      </div>
+      <h3>Generate SHA-256 Fingerprint</h3>
+      <p>A unique 256-bit hash is computed from the file's exact contents — a digital fingerprint.</p>
+    </div>
+    <div class="step-connector reveal"></div>
+    <div class="step-card reveal">
+      <div class="step-number">03</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26"><polygon points="12,3 20,7 20,17 12,21 4,17 4,7" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </div>
+      <h3>Secure TEE Signature</h3>
+      <p>The hash is sealed inside a Trusted Execution Environment and signed with a hardware-bound key.</p>
+    </div>
+    <div class="step-connector reveal"></div>
+    <div class="step-card reveal">
+      <div class="step-number">04</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 2l8 4v6c0 5.5-3.8 8.7-8 10-4.2-1.3-8-4.5-8-10V6l8-4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Permanent Origin Certificate</h3>
+      <p>An immutable, downloadable certificate is issued — proof of origin that travels with the file forever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS -->
+<section id="why-it-matters" class="section section-alt">
+  <div class="section-head reveal">
+    <span class="section-tag">THE PROBLEM</span>
+    <h2>Why It Matters</h2>
+    <p>The internet has lost its ability to tell what's real. CRYPTIQ gives it back.</p>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card reveal">
+      <div class="problem-icon glow-red">
+        <svg viewBox="0 0 24 24" width="28" height="28"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M9 9s1-1.5 3-1.5S15 9 15 9M9 15s1 1.5 3 1.5 3-1.5 3-1.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <h3>Deepfakes</h3>
+      <p>Synthetic faces and voices are now indistinguishable from reality, eroding trust in video evidence itself.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon glow-amber">
+        <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 3l9 16H3z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 9v5M12 17h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h3>AI-Generated Misinformation</h3>
+      <p>Generative models can flood feeds with convincing fake news, images, and documents at infinite scale.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon glow-blue">
+        <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 2l8 4v6c0 5.5-3.8 8.7-8 10-4.2-1.3-8-4.5-8-10V6l8-4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <h3>Content Ownership</h3>
+      <p>Creators have no reliable way to prove they made something first, or that it hasn't been altered since.</p>
+    </div>
+    <div class="problem-card reveal">
+      <div class="problem-icon glow-cyan">
+        <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <h3>Digital Authenticity</h3>
+      <p>Detection-after-the-fact is an arms race that detectors are losing. Proving origin at creation ends the race.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY ARCHITECTURE -->
+<section id="architecture" class="section">
+  <div class="section-head reveal">
+    <span class="section-tag">ARCHITECTURE</span>
+    <h2>Security Architecture</h2>
+    <p>A cryptographic chain of custody from creation to verification.</p>
+  </div>
+  <div class="flow-diagram reveal">
+    <div class="flow-node">
+      <div class="flow-icon"><svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+      <span>Creator</span>
+    </div>
+    <div class="flow-arrow"><span class="flow-pulse"></span></div>
+    <div class="flow-node">
+      <div class="flow-icon"><svg viewBox="0 0 24 24" width="24" height="24"><rect x="3" y="9" width="18" height="9" rx="1.5" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M7 9V6a5 5 0 0110 0v3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></div>
+      <span>SHA-256 Hash</span>
+    </div>
+    <div class="flow-arrow"><span class="flow-pulse"></span></div>
+    <div class="flow-node flow-node-highlight">
+      <div class="flow-icon"><svg viewBox="0 0 24 24" width="24" height="24"><polygon points="12,3 20,7 20,17 12,21 4,17 4,7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+      <span>TEE Enclave</span>
+    </div>
+    <div class="flow-arrow"><span class="flow-pulse"></span></div>
+    <div class="flow-node">
+      <div class="flow-icon"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2v20M4 8l8-6 8 6M4 8v8l8 6 8-6V8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>
+      <span>Digital Signature</span>
+    </div>
+    <div class="flow-arrow"><span class="flow-pulse"></span></div>
+    <div class="flow-node">
+      <div class="flow-icon"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2l8 4v6c0 5.5-3.8 8.7-8 10-4.2-1.3-8-4.5-8-10V6l8-4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+      <span>Certificate</span>
+    </div>
+  </div>
+
+  <div class="trust-indicator reveal">
+    <span class="trust-dot"></span>
+    <div>
+      <strong>TEE Trust Indicator: ACTIVE</strong>
+      <p>Enclave attestation verified. All signatures generated inside an isolated, hardware-bound execution boundary.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<section id="demo" class="section section-demo">
+  <div class="section-head reveal">
+    <span class="section-tag">LIVE VERIFICATION</span>
+    <h2>Stamp It. Verify It.</h2>
+    <p>This is a fully functional engine — every hash, signature, and certificate below is real.</p>
+  </div>
+
+  <div class="demo-split reveal">
+
+    <!-- STAMP COLUMN -->
+    <div class="demo-col">
+      <div class="panel panel-stamp" id="panel-stamp">
+        <div class="panel-header">
+          <div class="panel-icon-wrap">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l8 4v6c0 5.5-3.8 8.7-8 10-4.2-1.3-8-4.5-8-10V6l8-4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>STAMP IT</h3>
+            <p>Create a permanent origin certificate</p>
+          </div>
+        </div>
+
+        <form id="stampForm" class="panel-form">
+          <div class="auth-bar">
+            <a href="#" id="authLink" class="auth-link">Login / Register</a>
+          </div>
+
+          <label class="field">
+            <span>
+              Creator Name
+              <span class="verified-badge" id="verifiedBadge" hidden>✅ Verified Identity</span>
+            </span>
+            <input type="text" name="creator" id="stampCreator" placeholder="e.g. Bushra Zafar" required />
+            <span class="auth-user-info" id="authUserInfo" hidden>
+              Logged in as <span id="authUserEmail"></span> · <a href="#" id="logoutLink">Logout</a>
+            </span>
+          </label>
+
+          <div class="field">
+            <span>Origin</span>
+            <div class="origin-toggle">
+              <input type="radio" name="origin" id="originHuman" value="Human Made" checked />
+              <label for="originHuman">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                Human Made
+              </label>
+              <input type="radio" name="origin" id="originAI" value="AI Generated" />
+              <label for="originAI">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="7" width="16" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 7V4h6v3M9 12h.01M15 12h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                AI Generated
+              </label>
+            </div>
+          </div>
+
+          <label class="field dropzone" id="stampDropzone">
+            <span class="dz-hint">Drop a file here or click to browse</span>
+            <span class="dz-filename" id="stampFileName"></span>
+            <input type="file" name="file" id="stampFile" hidden required />
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-block" id="stampSubmit">
+            <span class="btn-label">GENERATE CERTIFICATE</span>
+            <span class="btn-spinner" hidden></span>
+          </button>
+        </form>
+
+        <div class="result-zone" id="stampResult"></div>
+      </div>
+
+      <!-- RECENT CERTIFICATES -->
+      <div class="panel recent-panel" id="recentPanel">
+        <div class="panel-header">
+          <div class="panel-icon-wrap recent-icon-wrap">
+            <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h3>RECENT CERTIFICATES</h3>
+            <p>Last 5 stamps, persisted on disk</p>
+          </div>
+        </div>
+        <div class="recent-list" id="recentList">
+          <div class="recent-empty">No certificates yet — stamp a file to see it here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERIFY PANEL -->
+    <div class="panel panel-verify" id="panel-verify">
+      <div class="panel-header">
+        <div class="panel-icon-wrap panel-icon-verify">
+          <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h3>VERIFY IT</h3>
+          <p>Check a file's origin and integrity</p>
+        </div>
+      </div>
+
+      <form id="verifyForm" class="panel-form">
+        <label class="field dropzone" id="verifyDropzone">
+          <span class="dz-hint">Drop a file here or click to browse</span>
+          <span class="dz-filename" id="verifyFileName"></span>
+          <input type="file" name="file" id="verifyFile" hidden required />
+        </label>
+
+        <button type="submit" class="btn btn-outline btn-block" id="verifySubmit">
+          <span class="btn-label">VERIFY ORIGIN</span>
+          <span class="btn-spinner" hidden></span>
+        </button>
+      </form>
+
+      <div class="result-zone" id="verifyResult"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark">
+        <svg viewBox="0 0 32 32" width="22" height="22"><polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="none" stroke="currentColor" stroke-width="1.6"/><polygon points="16,9 22,12.5 22,19.5 16,23 10,19.5 10,12.5" fill="currentColor" opacity="0.85"/></svg>
+      </span>
+      <span>CRYPTIQ</span>
+    </div>
+    <p>Trust infrastructure for the synthetic age. SHA-256 fingerprinting + simulated TEE attestation.</p>
+    <p class="footer-fine">© 2026 CRYPTIQ. Built for the future of digital authenticity.</p>
+  </div>
+</footer>
+
+<!-- CERTIFICATE MODAL -->
+<div class="modal-overlay" id="certModalOverlay">
+  <div class="cert-modal" id="certModal"></div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModalOverlay">
+  <div class="cert-modal auth-modal" id="authModal">
+    <button class="cert-close" id="authCloseBtn">&times;</button>
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab active" data-tab="login">Login</button>
+      <button type="button" class="auth-tab" data-tab="register">Register</button>
+    </div>
+
+    <form id="loginForm" class="auth-form panel-form">
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" id="loginEmail" required />
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input type="password" name="password" id="loginPassword" required />
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+      <p class="auth-error" id="loginError"></p>
+    </form>
+
+    <form id="registerForm" class="auth-form panel-form" hidden>
+      <label class="field">
+        <span>Full Name</span>
+        <input type="text" name="full_name" id="registerFullName" required />
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" id="registerEmail" required />
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input type="password" name="password" id="registerPassword" required minlength="6" />
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
+      <p class="auth-error" id="registerError"></p>
+    </form>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

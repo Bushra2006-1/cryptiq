@@ -1,0 +1,16 @@
+{
+  "stamp_id": "cq_d6e397477e7e",
+  "creator": "Bushra",
+  "origin": "Human Made",
+  "timestamp": "2026-06-23T12:44:17.691126+00:00",
+  "file_name": "me_image.jpeg",
+  "file_hash": "cf7efbcb93fe2aba37c54e6753c5d110d8787a10c949f6627e498aee5d1dc1ad",
+  "tee_enclave_id": "enc_c716-3928-7573-2019",
+  "tee_signature": "b3ea810430c6c98b8f230c339ed00e03743410ec53771d87c1a98ce11f01c7d9",
+  "tee_platform": "CRYPTIQ-SIM-ENCLAVE/v1",
+  "tee_region": "us-east-1a",
+  "tee_attestation_nonce": "d3b2df41b1977b97dc3939f914d8d31d",
+  "tee_attestation_digest": "c89aa414c4c43dd617eaf21993ac4e63",
+  "tamper_proof": true,
+  "cryptiq_version": "1.0"
+}

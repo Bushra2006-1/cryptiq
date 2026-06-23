@@ -1,0 +1,14 @@
+{
+  "bushra.zafar@bigacademy.com": {
+    "full_name": "bushra",
+    "email": "bushra.zafar@bigacademy.com",
+    "password_hash": "scrypt:32768:8:1$gkPWZqowJZDihQMI$665780d474c28286ac5c4cb46aa29f4be9f008414a2244a4213d1ccb4c2d3fbd7333352783043743332a39052f7ae3ec6b186f4610fdd93d16735d185c20b87d",
+    "private_key": "351655f2cf21198b1bd6290d7e994f73720d0a2c31e0fab7d75dafa917dd1d55"
+  },
+  "keepgoing27012023@gmail.com": {
+    "full_name": "BUSHRA",
+    "email": "keepgoing27012023@gmail.com",
+    "password_hash": "scrypt:32768:8:1$dEJ3M3oXHA21Rp2l$602150c7761bb14c229a1cb8fb971473f6e5e6e26cb517cdb4f539ed3cb108e620a1cf9a9471ee5b567d770f81d3c8d3158855baea89b71ceb66336399b208b7",
+    "private_key": "4224f2680018ffcf642c4588925db1b14e80eab98f999fc5ff1fb2949d48d8ed"
+  }
+}
