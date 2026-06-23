@@ -13,9 +13,9 @@ import os
 import uuid
 from datetime import datetime, timezone
 
+from paths import STAMPS_DIR
 from tee import generate_tee_proof
 
-STAMPS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stamps")
 CRYPTIQ_VERSION = "1.0"
 
 

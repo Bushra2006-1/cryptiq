@@ -45,7 +45,13 @@
       "Bash(curl -s -b /tmp/cookies.txt -X POST http://127.0.0.1:5050/stamp -F \"creator=Should Be Ignored\" -F \"origin=Human Made\" -F \"file=@/tmp/testfile.txt\")",
       "Bash(curl -s -b /tmp/cookies.txt -c /tmp/cookies.txt -X POST http://127.0.0.1:5050/logout)",
       "Bash(curl -s -X POST http://127.0.0.1:5050/stamp -F \"creator=Anon Person\" -F \"origin=Human Made\" -F \"file=@/tmp/testfile.txt\")",
-      "Bash(kill %1)"
+      "Bash(kill %1)",
+      "Bash(git rm *)",
+      "Bash(vercel --version)",
+      "Bash(command -v vercel)",
+      "Bash(python -c ' *)",
+      "Bash(VERCEL=1 venv/Scripts/python.exe -c ' *)",
+      "Bash(git add *)"
     ]
   }
 }

@@ -17,21 +17,18 @@ from flask import Flask, jsonify, render_template, request, session
 from werkzeug.utils import secure_filename
 
 from auth import authenticate_user, get_user_by_email, register_user
+from paths import UPLOAD_DIR
 from stamper import create_stamp
 from verifier import delete_certificate_by_id, get_certificate_by_id, get_recent_certificates, verify_file
 
 load_dotenv()
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
 ALLOWED_ORIGINS = {"Human Made", "AI Generated"}
 MAX_CONTENT_LENGTH = 100 * 1024 * 1024  # 100 MB
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY", "cryptiq-dev-secret")
 app.config["MAX_CONTENT_LENGTH"] = MAX_CONTENT_LENGTH
-
-os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
 def _save_upload(file_storage) -> tuple[str, str]:

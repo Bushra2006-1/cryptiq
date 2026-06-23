@@ -12,7 +12,7 @@ import secrets
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
-USERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "users.json")
+from paths import USERS_FILE
 
 
 def _load_users() -> dict:

@@ -8,10 +8,9 @@ against every certificate stored in stamps/ to determine origin status.
 import json
 import os
 
+from paths import STAMPS_DIR
 from stamper import hash_file
 from tee import verify_tee_proof
-
-STAMPS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stamps")
 
 
 def _load_all_certificates() -> list[dict]:
