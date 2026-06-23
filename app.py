@@ -9,6 +9,8 @@ Routes:
   GET  /certificate/<id>      View a single certificate as JSON
 """
 
+from __future__ import annotations
+
 import os
 import uuid
 

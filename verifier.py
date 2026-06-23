@@ -5,6 +5,8 @@ Takes an uploaded file, computes its SHA-256 fingerprint, and checks it
 against every certificate stored in stamps/ to determine origin status.
 """
 
+from __future__ import annotations
+
 import json
 import os
 

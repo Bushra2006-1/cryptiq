@@ -6,6 +6,8 @@ per-user private signing key generated at registration time. Users are
 persisted to users.json with hashed passwords (werkzeug.security).
 """
 
+from __future__ import annotations
+
 import json
 import os
 import secrets

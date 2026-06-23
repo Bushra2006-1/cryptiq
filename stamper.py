@@ -6,6 +6,8 @@ fingerprint, seals it inside the simulated TEE, and writes a permanent
 origin certificate to disk.
 """
 
+from __future__ import annotations
+
 import hashlib
 import hmac
 import json
